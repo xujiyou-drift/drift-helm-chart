@@ -1,0 +1,9 @@
+apiVersion: v2
+name: drift
+description: Big data construction platform based on kubernetes
+
+type: application
+
+version: 0.0.1
+
+appVersion: 0.0.1

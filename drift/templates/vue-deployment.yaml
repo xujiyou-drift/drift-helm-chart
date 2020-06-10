@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drift-vue
+  namespace: drift
+  labels:
+    app: drift-vue
+spec:
+  selector:
+    matchLabels:
+      app: drift-vue
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: drift-vue
+    spec:
+      containers:
+        - name: drift-vue
+          image: registry.prod.bbdops.com/common/drift-vue:v0.0.5
+          ports:
+            - containerPort: 80
+          env:
+            - name: DRIFT_BACKEND_ADDRESS
+              value: {{ .Values.ingress.host }}
