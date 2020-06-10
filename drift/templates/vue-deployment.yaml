@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: drift-vue
-  namespace: drift
   labels:
     app: drift-vue
 spec:
