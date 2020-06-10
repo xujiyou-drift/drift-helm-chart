@@ -6,9 +6,8 @@ metadata:
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
-  creationTimestamp: null
   name: drift
 rules:
   - apiGroups:
@@ -22,9 +21,6 @@ rules:
       - events
       - configmaps
       - secrets
-      - driftinits
-      - zookeepers
-      - kafkas
     verbs:
       - create
       - delete
@@ -82,6 +78,7 @@ rules:
       - '*'
       - driftinits
       - kafkas
+      - zookeepers
     verbs:
       - create
       - delete
@@ -93,14 +90,15 @@ rules:
 
 ---
 
-kind: RoleBinding
+kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: drift
 subjects:
   - kind: ServiceAccount
     name: drift
+    namespace: {{ .Release.Namespace }}
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: drift
   apiGroup: rbac.authorization.k8s.io
